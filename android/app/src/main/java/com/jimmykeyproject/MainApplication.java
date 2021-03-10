@@ -10,6 +10,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.visilabs.Visilabs;
+import euromsg.com.euromobileandroid.EuroMobileManager;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -45,8 +47,28 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+      initEuroMessage();
   }
 
+    private void initEuroMessage() {
+        String appAlias = "demo-alias";
+        String huaweiAppAlias = "demo-alias-huawei";
+        String organizationId = "676D325830564761676D453D";
+        String siteId = "356467332F6533766975593D";
+        String datasource = "visistore";
+        String channel = "Android";
+        String segmentUrl = "http://lgr.visilabs.net";
+        String realtimeUrl = "http://rt.visilabs.net";
+        String targetUrl = "http://s.visilabs.net/json";
+        String actionUrl = "http://s.visilabs.net/actjson";
+        String geofenceUrl = "http://s.visilabs.net/geojson";
+
+        Visilabs.CreateAPI(organizationId, siteId, segmentUrl,
+                datasource, realtimeUrl, channel, this, targetUrl, actionUrl, 30000, geofenceUrl, true);
+
+        EuroMobileManager euroMobileManager = EuroMobileManager.init(appAlias, huaweiAppAlias, this);
+        euroMobileManager.setPushIntent("com.demo.MainActivity", this);
+    }
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
