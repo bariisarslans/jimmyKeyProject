@@ -26,7 +26,7 @@ const App = () => {
   useEffect(() => {
     addExtra()
     addListeners()
-    requestPermissions()
+    // requestPermissions()
 
     return () => removeListeners()
   }, [])
