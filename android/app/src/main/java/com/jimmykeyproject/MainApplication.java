@@ -68,6 +68,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         EuroMobileManager euroMobileManager = EuroMobileManager.init(appAlias, huaweiAppAlias, this);
         euroMobileManager.setPushIntent("com.demo.MainActivity", this);
+        euroMobileManager.setNotificationLargeIcon(R.drawable.ic_launcher,this);
     }
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
